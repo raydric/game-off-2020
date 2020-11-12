@@ -1,0 +1,11 @@
+<Project Sdk="Godot.NET.Sdk/3.2.3">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Gameoff</RootNamespace>
+    <AssemblyName>Game Off 2020</AssemblyName>
+    <PackageId>Game Off 2020</PackageId>
+    <Authors>Raydric</Authors>
+    <Company />
+    <Product>Game Off 2020</Product>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://hud/HUD.cs" type="Script" id=1]
+[ext_resource path="res://assets/health_bar.png" type="Texture" id=2]
+[ext_resource path="res://assets/full_bar.png" type="Texture" id=3]
+[ext_resource path="res://assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 22
+font_data = ExtResource( 4 )
+
+[node name="HUD" type="MarginContainer"]
+anchor_right = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 20.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 24.0
+custom_constants/separation = 50
+
+[node name="HealthContainer" type="HBoxContainer" parent="MainContainer"]
+margin_right = 276.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+
+[node name="HealthLabel" type="Label" parent="MainContainer/HealthContainer"]
+margin_top = 1.0
+margin_right = 42.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "Health"
+
+[node name="HealthBar" type="TextureProgress" parent="MainContainer/HealthContainer"]
+margin_left = 52.0
+margin_right = 276.0
+margin_bottom = 24.0
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="FleetHealthContainer" type="HBoxContainer" parent="MainContainer"]
+margin_left = 326.0
+margin_right = 593.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FleetHealthLabel" type="Label" parent="MainContainer/FleetHealthContainer"]
+margin_top = 1.0
+margin_right = 33.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 2 )
+text = "Fleet"
+
+[node name="FleetHealthBar" type="TextureProgress" parent="MainContainer/FleetHealthContainer"]
+margin_left = 43.0
+margin_right = 267.0
+margin_bottom = 24.0
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+
+[node name="GunDamageContainer" type="HBoxContainer" parent="MainContainer"]
+margin_left = 643.0
+margin_right = 766.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunDamageLabel" type="Label" parent="MainContainer/GunDamageContainer"]
+margin_top = 1.0
+margin_right = 81.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 3 )
+text = "Gun Damage"
+
+[node name="GunDamage" type="Label" parent="MainContainer/GunDamageContainer"]
+margin_left = 91.0
+margin_top = 1.0
+margin_right = 123.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 4 )
+text = "0 (0)"
+
+[node name="MissileDamageContainer" type="HBoxContainer" parent="MainContainer"]
+margin_left = 816.0
+margin_right = 962.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+
+[node name="MissileDamageLabel" type="Label" parent="MainContainer/MissileDamageContainer"]
+margin_top = 1.0
+margin_right = 104.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 3 )
+text = "Missile Damage"
+
+[node name="MissileDamage" type="Label" parent="MainContainer/MissileDamageContainer"]
+margin_left = 114.0
+margin_top = 1.0
+margin_right = 146.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 5 )
+text = "0 (0)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MetalScrapContainer" type="HBoxContainer" parent="MainContainer"]
+margin_left = 1012.0
+margin_right = 1112.0
+margin_bottom = 24.0
+custom_constants/separation = 10
+
+[node name="MetalScrapLabel" type="Label" parent="MainContainer/MetalScrapContainer"]
+margin_top = 1.0
+margin_right = 82.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 6 )
+text = "Metal Scrap"
+
+[node name="MetalScrap" type="Label" parent="MainContainer/MetalScrapContainer"]
+margin_left = 92.0
+margin_top = 1.0
+margin_right = 100.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 7 )
+text = "0"
