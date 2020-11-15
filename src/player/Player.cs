@@ -15,24 +15,26 @@ public class Player : Area2D
 	private int _missileDamage = 50;
 	private float _missileCooldown = 5f;
 
-	private int _metalScrap;
+	private int _metalScrap = 200;
 	
-	// PRICES
-	private int _repairPrice = 50;
-	private int _upgradePrice = 100;
-	
-	// PUBLIC 
+	// PROPERTIES
 	public int Health => _health;
-	public int MaxHealth => _maxHealth;
 	public int FleetHealth => _fleetHealth;
 	public int MaxFleetHealth => _maxFleetHealth;
+	public int MaxHealth => _maxHealth;
 	public int Speed => _speed;
 	public int GunDamage => _gunDamage;
 	public float GunCooldown => _gunCooldown;
 	public int MissileDamage => _missileDamage;
 	public float MissileCooldown => _missileCooldown;
 	public int MetalScrap => _metalScrap;
+	public int RepairPrice => _repairPrice;
+	public int UpgradePrice => _upgradePrice;
 	
+	// PRICES
+	private readonly int _repairPrice = 50;
+	private readonly int _upgradePrice = 100;
+
 	// STATE
 	private bool _active;
 	private float _movement;
@@ -123,7 +125,7 @@ public class Player : Area2D
 			}
 
 		if (Input.IsKeyPressed((int) KeyList.D))
-			if (Position.x < viewRect.Size.x - 80)
+			if (Position.x < viewRect.Size.x - 40)
 			{
 				direction.x = 1;
 				idle = false;
@@ -292,7 +294,7 @@ public class Player : Area2D
 		if (_upgradePrice <= _metalScrap)
 		{
 			_metalScrap -= _upgradePrice;
-			_missileDamage += 5;
+			_missileDamage += 25;
 		}
 	}
 

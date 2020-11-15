@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public class Game : Node2D
@@ -13,6 +14,7 @@ public class Game : Node2D
 	private readonly PackedScene _fleetScene2 = ResourceLoader.Load("res://fleet/Fleet2.tscn") as PackedScene;
 	private readonly PackedScene _flightButtonScene = ResourceLoader.Load("res://game/FlightButton.tscn") as PackedScene;
 	private readonly PackedScene _menuButtonScene = ResourceLoader.Load("res://game/MenuButton.tscn") as PackedScene;
+	private readonly PackedScene _upgradeScene = ResourceLoader.Load("res://game/UpgradeScreen.tscn") as PackedScene;
 
 	private Camera2D _camera2D;
 	private const float CameraSpeed = 800;
@@ -29,6 +31,18 @@ public class Game : Node2D
 	private FlightButton _flightButton;
 	private MenuButton _menuButton;
 	private GameOver _gameOver;
+	private UpgradeScreen _upgradeScreen;
+	
+	private Fleet fleet1;
+	private Fleet fleet2;
+	private Fleet fleet3;
+	private Fleet fleet4;
+	private Fleet fleet5;
+	private Fleet2 fleet6;
+	private Fleet2 fleet7;
+	private Fleet2 fleet8;
+	private Fleet2 fleet9;
+	private Fleet2 fleet10;
 
 	public override void _Ready()
 	{
@@ -48,64 +62,74 @@ public class Game : Node2D
 			_level = level;
 		}
 		
-		if (_fleetScene.Instance() is Fleet fleet)
+		if (_fleetScene.Instance() is Fleet f1)
 		{
-			fleet.Position = new Vector2(-200, 250);
-			GetTree().CurrentScene.AddChild(fleet);
+			f1.Position = new Vector2(-200, 250);
+			GetTree().CurrentScene.AddChild(f1);
+			fleet1 = f1;
 		}
 		
-		if (_fleetScene.Instance() is Fleet fleet2)
+		if (_fleetScene.Instance() is Fleet f2)
 		{
-			fleet2.Position = new Vector2(-200, 450);
-			GetTree().CurrentScene.AddChild(fleet2);
+			f2.Position = new Vector2(-200, 450);
+			GetTree().CurrentScene.AddChild(f2);
+			fleet2 = f2;
 		}
 		
-		if (_fleetScene.Instance() is Fleet fleet3)
+		if (_fleetScene.Instance() is Fleet f3)
 		{
-			fleet3.Position = new Vector2(-500, 150);
-			GetTree().CurrentScene.AddChild(fleet3);
+			f3.Position = new Vector2(-500, 150);
+			GetTree().CurrentScene.AddChild(f3);
+			fleet3 = f3;
 		}
 		
-		if (_fleetScene.Instance() is Fleet fleet4)
+		if (_fleetScene.Instance() is Fleet f4)
 		{
-			fleet4.Position = new Vector2(-500, 350);
-			GetTree().CurrentScene.AddChild(fleet4);
+			f4.Position = new Vector2(-500, 350);
+			GetTree().CurrentScene.AddChild(f4);
+			fleet4 = f4;
 		}
 		
-		if (_fleetScene.Instance() is Fleet fleet5)
+		if (_fleetScene.Instance() is Fleet f5)
 		{
-			fleet5.Position = new Vector2(-500, 550);
-			GetTree().CurrentScene.AddChild(fleet5);
+			f5.Position = new Vector2(-500, 550);
+			GetTree().CurrentScene.AddChild(f5);
+			fleet5 = f5;
 		}
 		
-		if (_fleetScene2.Instance() is Fleet2 fleet6)
+		if (_fleetScene2.Instance() is Fleet2 f6)
 		{
-			fleet6.Position = new Vector2(-800, 250);
-			GetTree().CurrentScene.AddChild(fleet6);
+			f6.Position = new Vector2(-800, 250);
+			GetTree().CurrentScene.AddChild(f6);
+			fleet6 = f6;
 		}
 		
-		if (_fleetScene2.Instance() is Fleet2 fleet7)
+		if (_fleetScene2.Instance() is Fleet2 f7)
 		{
-			fleet7.Position = new Vector2(-800, 450);
-			GetTree().CurrentScene.AddChild(fleet7);
+			f7.Position = new Vector2(-800, 450);
+			GetTree().CurrentScene.AddChild(f7);
+			fleet7 = f7;
 		}
 		
-		if (_fleetScene2.Instance() is Fleet2 fleet8)
+		if (_fleetScene2.Instance() is Fleet2 f8)
 		{
-			fleet8.Position = new Vector2(-1100, 150);
-			GetTree().CurrentScene.AddChild(fleet8);
+			f8.Position = new Vector2(-1100, 150);
+			GetTree().CurrentScene.AddChild(f8);
+			fleet8 = f8;
 		}
 		
-		if (_fleetScene2.Instance() is Fleet2 fleet9)
+		if (_fleetScene2.Instance() is Fleet2 f9)
 		{
-			fleet9.Position = new Vector2(-1100, 350);
-			GetTree().CurrentScene.AddChild(fleet9);
+			f9.Position = new Vector2(-1100, 350);
+			GetTree().CurrentScene.AddChild(f9);
+			fleet9 = f9;
 		}
 		
-		if (_fleetScene2.Instance() is Fleet2 fleet10)
+		if (_fleetScene2.Instance() is Fleet2 f10)
 		{
-			fleet10.Position = new Vector2(-1100, 550);
-			GetTree().CurrentScene.AddChild(fleet10);
+			f10.Position = new Vector2(-1100, 550);
+			GetTree().CurrentScene.AddChild(f10);
+			fleet10 = f10;
 		}
 
 		_gameState = GameState.Intro;
@@ -131,6 +155,8 @@ public class Game : Node2D
 							_hud.QueueFree();
 							_hud = null;
 							_player.Deactivate();
+
+							UpdateFleet();
 						}
 					}
 				}
@@ -154,7 +180,14 @@ public class Game : Node2D
 				_gameState = GameState.Game;
 				break;
 			case GameState.GameOver:
+				if (_level != null)
+				{
+					_level.QueueFree();
+					_level = null;
+				}
+				
 				ShowGameOver();
+				
 				if (MoveCameraBack(delta))
 				{
 					if (_menuButton == null)
@@ -169,11 +202,20 @@ public class Game : Node2D
 				}
 				break;
 			case GameState.UpgradeMenu:
+				if (_upgradeScreen == null)
+				{
+					if (_upgradeScene.Instance() is UpgradeScreen upgradeScreen)
+					{
+						GetTree().CurrentScene.AddChild(upgradeScreen);
+						_upgradeScreen = upgradeScreen;
+					}
+				}
+				
 				if (_flightButton == null)
 				{
 					if (_flightButtonScene.Instance() is FlightButton flightButton)
 					{
-						flightButton.RectPosition = new Vector2(-256, 600);
+						flightButton.RectPosition = new Vector2(-250, 600);
 						GetTree().CurrentScene.AddChild(flightButton);
 						_flightButton = flightButton;
 					}
@@ -181,10 +223,17 @@ public class Game : Node2D
 				
 				break;
 			case GameState.Start:
+				if (_upgradeScreen != null)
+				{
+					_upgradeScreen.QueueFree();
+					_upgradeScreen = null;
+				}
+				
 				if (MoveCameraForward(delta))
 				{
 					_levelWaitTime = 0;
 					_flightButton = null;
+					_upgradeScreen = null;
 					_gameState = GameState.PrepareGame;
 				}
 				break;
@@ -193,7 +242,7 @@ public class Game : Node2D
 				{
 					if (_flightButtonScene.Instance() is FlightButton flightButton)
 					{
-						flightButton.RectPosition = new Vector2(-256, 600);
+						flightButton.RectPosition = new Vector2(-250, 600);
 						GetTree().CurrentScene.AddChild(flightButton);
 						_flightButton = flightButton;
 					}
@@ -246,6 +295,103 @@ public class Game : Node2D
 		return true;
 	}
 
+	private void UpdateFleet()
+	{
+		var fleetHealth = _player.FleetHealth;
+		var maxFleetHealth = _player.MaxFleetHealth;
+		var shipHealth = maxFleetHealth / 10;
+
+		if (fleetHealth < maxFleetHealth - shipHealth)
+		{
+			if (fleet1 != null)
+			{
+				fleet1.QueueFree();
+				fleet1 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 2 * shipHealth)
+		{
+			if (fleet2 != null)
+			{
+				fleet2.QueueFree();
+				fleet2 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 3 * shipHealth)
+		{
+			if (fleet3 != null)
+			{
+				fleet3.QueueFree();
+				fleet3 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 4 * shipHealth)
+		{
+			if (fleet4 != null)
+			{
+				fleet4.QueueFree();
+				fleet4 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 5 * shipHealth)
+		{
+			if (fleet5 != null)
+			{
+				fleet5.QueueFree();
+				fleet5 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 6 * shipHealth)
+		{
+			if (fleet6 != null)
+			{
+				fleet6.QueueFree();
+				fleet6 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 7 * shipHealth)
+		{
+			if (fleet7 != null)
+			{
+				fleet7.QueueFree();
+				fleet7 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 8 * shipHealth)
+		{
+			if (fleet8 != null)
+			{
+				fleet8.QueueFree();
+				fleet8 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 9 * shipHealth)
+		{
+			if (fleet9 != null)
+			{
+				fleet9.QueueFree();
+				fleet9 = null;
+			}
+		}
+		
+		if (fleetHealth < maxFleetHealth - 10 * shipHealth)
+		{
+			if (fleet10 != null)
+			{
+				fleet10.QueueFree();
+				fleet10 = null;
+			}
+		}
+	}
+
 	private void _on_Player_tree_exited()
 	{
 		var children = GetNode("Level").GetChildren();
@@ -266,6 +412,8 @@ public class Game : Node2D
 	{
 		if (_gameOver == null)
 		{
+			UpdateFleet();
+			
 			if (_gameOverScene.Instance() is GameOver gameOver)
 			{
 				gameOver.RectGlobalPosition = new Vector2(-_viewRect.Size.x + 75, 100);

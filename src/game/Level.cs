@@ -25,7 +25,7 @@ public class Level : Node2D
 		_levelTimer = new Timer();
 		AddChild(_levelTimer);
 		_levelTimer.Connect("timeout", this, nameof(_on_Timer_timeout_level));
-		_levelTimer.WaitTime = 30;
+		_levelTimer.WaitTime = 120;
 		_levelTimer.OneShot = true;
 	}
 
@@ -40,7 +40,7 @@ public class Level : Node2D
 		_spawnTimer.Start();
 		_levelTimer.Start();
 	}
-
+	
 	public void IncreaseDifficulty()
 	{
 		_enemyDamage += 5;
