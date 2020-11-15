@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class Player : Area2D
@@ -6,8 +5,8 @@ public class Player : Area2D
 	// PLAYER VARIABLES
 	private int _health = 100;
 	private int _maxHealth = 100;
-	private int _fleetHealth = 300;
-	private int _maxFleetHealth = 300;
+	private int _fleetHealth = 500;
+	private int _maxFleetHealth = 500;
 	private int _speed = 200;
 	
 	private int _gunDamage = 10;
@@ -17,6 +16,10 @@ public class Player : Area2D
 	private float _missileCooldown = 5f;
 
 	private int _metalScrap;
+	
+	// PRICES
+	private int _repairPrice = 50;
+	private int _upgradePrice = 100;
 	
 	// PUBLIC 
 	public int Health => _health;
@@ -230,5 +233,75 @@ public class Player : Area2D
 			}
 		}
 	}
+
+	public void Repair()
+	{
+		if (_health < _maxHealth)
+		{
+			if (_repairPrice <= _metalScrap)
+			{
+				_metalScrap -= _repairPrice;
+				_health += 10;
+			
+				if (_health > _maxHealth)
+				{
+					_health = _maxHealth;
+				}
+			}
+		}
+	}
 	
+	public void UpgradeHealth()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_maxHealth += 10;
+		}
+	}
+
+	public void UpgradeSpeed()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_speed += 5;
+		}
+	}
+
+	public void UpgradeGunDamage()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_gunDamage += 5;
+		}
+	}
+
+	public void UpgradeGunCooldown()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_gunCooldown -= 0.01f;
+		}
+	}
+
+	public void UpgradeMissileDamage()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_missileDamage += 5;
+		}
+	}
+
+	public void UpgradeMissileCooldown()
+	{
+		if (_upgradePrice <= _metalScrap)
+		{
+			_metalScrap -= _upgradePrice;
+			_missileCooldown -= 0.02f;
+		}
+	}
 }

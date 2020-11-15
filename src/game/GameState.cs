@@ -1,6 +1,7 @@
 public enum GameState
 {
-    Menu,
+    Intro,
+    Start,
     PrepareGame,
     Game,
     GameOver,

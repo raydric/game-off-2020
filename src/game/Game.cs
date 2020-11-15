@@ -9,6 +9,10 @@ public class Game : Node2D
 	private readonly PackedScene _levelScene = ResourceLoader.Load("res://game/Level.tscn") as PackedScene;
 	private readonly PackedScene _hudScene = ResourceLoader.Load("res://hud/Hud.tscn") as PackedScene;
 	private readonly PackedScene _gameLevelScene = ResourceLoader.Load("res://game/GameLevel.tscn") as PackedScene;
+	private readonly PackedScene _fleetScene = ResourceLoader.Load("res://fleet/Fleet.tscn") as PackedScene;
+	private readonly PackedScene _fleetScene2 = ResourceLoader.Load("res://fleet/Fleet2.tscn") as PackedScene;
+	private readonly PackedScene _flightButtonScene = ResourceLoader.Load("res://game/FlightButton.tscn") as PackedScene;
+	private readonly PackedScene _menuButtonScene = ResourceLoader.Load("res://game/MenuButton.tscn") as PackedScene;
 
 	private Camera2D _camera2D;
 	private const float CameraSpeed = 800;
@@ -22,6 +26,8 @@ public class Game : Node2D
 	private Rect2 _viewRect;
 	private int _levelNumber = 1;
 	private float _levelWaitTime;
+	private FlightButton _flightButton;
+	private MenuButton _menuButton;
 	private GameOver _gameOver;
 
 	public override void _Ready()
@@ -41,8 +47,68 @@ public class Game : Node2D
 			GetTree().CurrentScene.AddChild(level);
 			_level = level;
 		}
+		
+		if (_fleetScene.Instance() is Fleet fleet)
+		{
+			fleet.Position = new Vector2(-200, 250);
+			GetTree().CurrentScene.AddChild(fleet);
+		}
+		
+		if (_fleetScene.Instance() is Fleet fleet2)
+		{
+			fleet2.Position = new Vector2(-200, 450);
+			GetTree().CurrentScene.AddChild(fleet2);
+		}
+		
+		if (_fleetScene.Instance() is Fleet fleet3)
+		{
+			fleet3.Position = new Vector2(-500, 150);
+			GetTree().CurrentScene.AddChild(fleet3);
+		}
+		
+		if (_fleetScene.Instance() is Fleet fleet4)
+		{
+			fleet4.Position = new Vector2(-500, 350);
+			GetTree().CurrentScene.AddChild(fleet4);
+		}
+		
+		if (_fleetScene.Instance() is Fleet fleet5)
+		{
+			fleet5.Position = new Vector2(-500, 550);
+			GetTree().CurrentScene.AddChild(fleet5);
+		}
+		
+		if (_fleetScene2.Instance() is Fleet2 fleet6)
+		{
+			fleet6.Position = new Vector2(-800, 250);
+			GetTree().CurrentScene.AddChild(fleet6);
+		}
+		
+		if (_fleetScene2.Instance() is Fleet2 fleet7)
+		{
+			fleet7.Position = new Vector2(-800, 450);
+			GetTree().CurrentScene.AddChild(fleet7);
+		}
+		
+		if (_fleetScene2.Instance() is Fleet2 fleet8)
+		{
+			fleet8.Position = new Vector2(-1100, 150);
+			GetTree().CurrentScene.AddChild(fleet8);
+		}
+		
+		if (_fleetScene2.Instance() is Fleet2 fleet9)
+		{
+			fleet9.Position = new Vector2(-1100, 350);
+			GetTree().CurrentScene.AddChild(fleet9);
+		}
+		
+		if (_fleetScene2.Instance() is Fleet2 fleet10)
+		{
+			fleet10.Position = new Vector2(-1100, 550);
+			GetTree().CurrentScene.AddChild(fleet10);
+		}
 
-		_gameState = GameState.Menu;
+		_gameState = GameState.Intro;
 
 		_player.Connect("tree_exited", this, nameof(_on_Player_tree_exited));
 	}
@@ -70,14 +136,14 @@ public class Game : Node2D
 				}
 				break;
 			case GameState.PrepareGame:
-				if (_levelNumber != 1)
-				{
-					_level.IncreaseDifficulty();
-				}
-
 				if (LevelIntroduction(delta))
 				{
 					return;
+				}
+				
+				if (_levelNumber != 1)
+				{
+					_level.IncreaseDifficulty();
 				}
 				
 				_levelNumber++;
@@ -89,20 +155,59 @@ public class Game : Node2D
 				break;
 			case GameState.GameOver:
 				ShowGameOver();
-				MoveCameraBack(delta);
+				if (MoveCameraBack(delta))
+				{
+					if (_menuButton == null)
+					{
+						if (_menuButtonScene.Instance() is MenuButton menuButton)
+						{
+							menuButton.RectPosition = new Vector2(-325, 600);
+							GetTree().CurrentScene.AddChild(menuButton);
+							_menuButton = menuButton;
+						}
+					}
+				}
 				break;
 			case GameState.UpgradeMenu:
+				if (_flightButton == null)
+				{
+					if (_flightButtonScene.Instance() is FlightButton flightButton)
+					{
+						flightButton.RectPosition = new Vector2(-256, 600);
+						GetTree().CurrentScene.AddChild(flightButton);
+						_flightButton = flightButton;
+					}
+				}
+				
 				break;
-			case GameState.Menu:
+			case GameState.Start:
 				if (MoveCameraForward(delta))
 				{
 					_levelWaitTime = 0;
+					_flightButton = null;
 					_gameState = GameState.PrepareGame;
 				}
+				break;
+			case GameState.Intro:
+				if (_flightButton == null)
+				{
+					if (_flightButtonScene.Instance() is FlightButton flightButton)
+					{
+						flightButton.RectPosition = new Vector2(-256, 600);
+						GetTree().CurrentScene.AddChild(flightButton);
+						_flightButton = flightButton;
+					}
+				}
+
 				break;
 			default:
 				throw new ArgumentOutOfRangeException();
 		}
+	}
+
+	public void ChangeGameState(GameState gameState)
+	{
+		_gameState = gameState;
 	}
 
 	private void CreateHud()
