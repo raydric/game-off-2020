@@ -47,6 +47,11 @@ public class Player : Area2D
 	
 	private Timer _gunCooldownTimer;
 	private Timer _missileCooldownTimer;
+
+	private AudioStreamPlayer _gunSound;
+	private AudioStreamPlayer _missileSound;
+	private AudioStreamPlayer _impactSound;
+	private AudioStreamPlayer _collectSound;
 	
 	private Node2D _gunPosition;
 	private Node2D _missilePosition;
@@ -61,6 +66,10 @@ public class Player : Area2D
 		_missilePosition = GetParent().GetNode<Node2D>("Player/FiringPositions/Missile");
 		_gunCooldownTimer = GetParent().GetNode<Timer>("Player/GunCooldown");
 		_missileCooldownTimer = GetParent().GetNode<Timer>("Player/MissileCooldown");
+		_gunSound = GetParent().GetNode<AudioStreamPlayer>("Player/GunSound");
+		_missileSound = GetParent().GetNode<AudioStreamPlayer>("Player/MissileSound");
+		_impactSound = GetNode<AudioStreamPlayer>("ImpactSound");
+		_collectSound = GetNode<AudioStreamPlayer>("CollectSound");
 		
 		Connect("area_entered", this,nameof(_on_Player_area_entered));
 	}
@@ -78,6 +87,8 @@ public class Player : Area2D
 				bullet.SetDamage(_gunDamage);
 				bullet.GlobalPosition = _gunPosition.GlobalPosition;
 				GetTree().CurrentScene.AddChild(bullet);
+				
+				_gunSound.Play();
 			}
 		}
 
@@ -90,6 +101,8 @@ public class Player : Area2D
 				missile.SetDamage(_missileDamage);
 				missile.GlobalPosition = _missilePosition.GlobalPosition;
 				GetTree().CurrentScene.AddChild(missile);
+				
+				_missileSound.Play();
 			}
 		}
 	}
@@ -188,6 +201,7 @@ public class Player : Area2D
 	{
 		_health -= damage;
 		_hud.SetHealth(_health);
+		_impactSound.Play();
 		
 		if (_health <= 0)
 		{
@@ -225,6 +239,8 @@ public class Player : Area2D
 				_metalScrap += scrapMetal.Collect();
 				_hud.SetMetalScrap(_metalScrap.ToString());
 			}
+			
+			_collectSound.Play();
 		}
 		else if (area.IsInGroup("enemies"))
 		{

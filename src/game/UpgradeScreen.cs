@@ -20,6 +20,8 @@ public class UpgradeScreen : Node2D
 	private Button _missileCooldownButton;
 	private Button _speedButton;
 	private Button _repairButton;
+
+	private AudioStreamPlayer _menuSound;
 	
 	public override void _Ready()
 	{
@@ -49,6 +51,8 @@ public class UpgradeScreen : Node2D
 		_missileCooldownButton.Connect("pressed", this,nameof(_on_MissileCooldownButton_pressed));
 		_speedButton.Connect("pressed", this,nameof(_on_SpeedButton_pressed));
 		_repairButton.Connect("pressed", this,nameof(_on_RepairButton_pressed));
+		
+		_menuSound = GetNode<AudioStreamPlayer>("MenuSound");
 	}
 
 	public override void _Process(float delta)
@@ -93,36 +97,43 @@ public class UpgradeScreen : Node2D
 
 	private void _on_HealthButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeHealth();
 	}
 	
 	private void _on_GunDamageButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeGunDamage();
 	}
 	
 	private void _on_GunCooldownButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeGunCooldown();
 	}
 	
 	private void _on_MissileDamageButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeMissileDamage();
 	}
 	
 	private void _on_MissileCooldownButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeMissileCooldown();
 	}
 	
 	private void _on_SpeedButton_pressed()
 	{
+		_menuSound.Play();
 		_player.UpgradeSpeed();
 	}
 	
 	private void _on_RepairButton_pressed()
 	{
+		_menuSound.Play();
 		_player.Repair();
 	}
 	

@@ -1,22 +1,23 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/background.png" type="Texture" id=1]
 [ext_resource path="res://game/UpgradeScreen.cs" type="Script" id=2]
 [ext_resource path="res://assets/Stardate81316-aolE.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/menuClick.wav" type="AudioStream" id=4]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 80
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -42,7 +43,7 @@ margin_left = -390.0
 margin_top = 210.0
 margin_right = -211.215
 margin_bottom = 474.782
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "Health
 Max Health
 
@@ -60,7 +61,7 @@ margin_left = -814.895
 margin_top = 6.19135
 margin_right = -482.895
 margin_bottom = 85.1913
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Level Finished"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -71,7 +72,7 @@ margin_left = -1113.68
 margin_top = 135.025
 margin_right = -902.681
 margin_bottom = 183.025
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Upgrades (100)"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,7 +83,7 @@ margin_left = -700.859
 margin_top = 135.0
 margin_right = -544.859
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Repair (50)"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -93,7 +94,7 @@ margin_left = -317.954
 margin_top = 135.0
 margin_right = -241.954
 margin_bottom = 183.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Stats"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -104,7 +105,7 @@ margin_left = -711.0
 margin_top = 307.0
 margin_right = -538.0
 margin_bottom = 355.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Metal scrap"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,7 +116,7 @@ margin_left = -1100.0
 margin_top = 200.0
 margin_right = -920.0
 margin_bottom = 238.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Health"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -126,7 +127,7 @@ margin_left = -710.984
 margin_top = 200.0
 margin_right = -540.984
 margin_bottom = 238.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Repair"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -137,7 +138,7 @@ margin_left = -1100.0
 margin_top = 270.0
 margin_right = -920.0
 margin_bottom = 308.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Gun Damage"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -148,7 +149,7 @@ margin_left = -1100.0
 margin_top = 340.0
 margin_right = -920.0
 margin_bottom = 376.942
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Gun Cooldown"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -159,7 +160,7 @@ margin_left = -1100.0
 margin_top = 410.0
 margin_right = -920.0
 margin_bottom = 446.942
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Missile Damage"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -170,7 +171,7 @@ margin_left = -1100.0
 margin_top = 480.0
 margin_right = -920.0
 margin_bottom = 516.942
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Missile Cooldown"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -181,7 +182,7 @@ margin_left = -1100.0
 margin_top = 550.0
 margin_right = -920.0
 margin_bottom = 587.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Speed"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -275,3 +276,7 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MenuSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = 24.0

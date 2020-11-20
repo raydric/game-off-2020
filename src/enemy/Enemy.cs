@@ -15,6 +15,8 @@ public class Enemy : Area2D
 	private readonly PackedScene _warpScene = ResourceLoader.Load("res://warp/Warp.tscn") as PackedScene;
 
 	private Node2D _gunPosition;
+	private AudioStreamPlayer _impactSound;
+	private AudioStreamPlayer _gunSound;
 
 	private Timer _bulletTimer;
 
@@ -32,7 +34,9 @@ public class Enemy : Area2D
 	{
 		AddToGroup("enemies");
 
-		_gunPosition = GetParent().GetNode<Node2D>("Enemy/FiringPositions/Gun");
+		_gunPosition = GetNode<Node2D>("FiringPositions/Gun");
+		_impactSound = GetNode<AudioStreamPlayer>("ImpactSound");
+		_gunSound = GetNode<AudioStreamPlayer>("GunSound");
 
 		GetNode("VisibilityNotifier2D").Connect("screen_exited", this,
 			nameof(_on_VisibilityNotifier2D_screen_exited));
@@ -54,6 +58,7 @@ public class Enemy : Area2D
 
 	public void TakeDamage(int damage)
 	{
+		_impactSound.Play();
 		_health -= damage;
 		if (_health <= 0)
 		{
@@ -102,9 +107,10 @@ public class Enemy : Area2D
 		{
 			if (_bulletScene.Instance() is EnemyBullet bullet)
 			{
-				AddChild(bullet);
+				_gunSound.Play();
+				GetTree().CurrentScene.AddChild(bullet);
 				bullet.SetDamage(_damage);
-				bullet.Position = _gunPosition.Position;
+				bullet.GlobalPosition = _gunPosition.GlobalPosition;
 			}
 		}
 	}

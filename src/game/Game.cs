@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Godot;
 
 public class Game : Node2D
@@ -32,7 +31,7 @@ public class Game : Node2D
 	private MenuButton _menuButton;
 	private GameOver _gameOver;
 	private UpgradeScreen _upgradeScreen;
-	
+
 	private Fleet fleet1;
 	private Fleet fleet2;
 	private Fleet fleet3;
