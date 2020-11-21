@@ -4,13 +4,13 @@
 [ext_resource path="res://game/Game.cs" type="Script" id=2]
 [ext_resource path="res://assets/space.ogg" type="AudioStream" id=3]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_strength = 0.6
 glow_blend_mode = 0
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
 emission_box_extents = Vector3( 360, 0, 1 )
 flag_disable_z = true
@@ -38,7 +38,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 
 [node name="Stars" type="Particles2D" parent="."]
 position = Vector2( 1280, 360 )
@@ -48,7 +48,7 @@ lifetime = 100.0
 preprocess = 100.0
 fract_delta = false
 visibility_rect = Rect2( -100, 0, 200, 1280 )
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -640, 360 )

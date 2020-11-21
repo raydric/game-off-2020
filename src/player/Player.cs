@@ -5,8 +5,8 @@ public class Player : Area2D
 	// PLAYER VARIABLES
 	private int _health = 100;
 	private int _maxHealth = 100;
-	private int _fleetHealth = 500;
-	private int _maxFleetHealth = 500;
+	private int _fleetHealth = 300;
+	private const int _maxFleetHealth = 300;
 	private int _speed = 200;
 	
 	private int _gunDamage = 10;
@@ -182,8 +182,8 @@ public class Player : Area2D
 		_active = true;
 		_hud.InitHealthBar(_maxHealth, _health);
 		_hud.InitFleetHealthBar(_maxFleetHealth, _fleetHealth);
-		_hud.SetGunDamage($"{_gunDamage} ({_gunCooldown})");
-		_hud.SetMissileDamage($"{_missileDamage} ({_missileCooldown})");
+		_hud.SetGunDamage($"{_gunDamage} ({_gunCooldown:n2})");
+		_hud.SetMissileDamage($"{_missileDamage} ({_missileCooldown:n2})");
 		_hud.SetMetalScrap(_metalScrap.ToString());
 	}
 
@@ -283,7 +283,7 @@ public class Player : Area2D
 		if (_upgradePrice <= _metalScrap)
 		{
 			_metalScrap -= _upgradePrice;
-			_speed += 5;
+			_speed += 10;
 		}
 	}
 
@@ -301,7 +301,7 @@ public class Player : Area2D
 		if (_upgradePrice <= _metalScrap)
 		{
 			_metalScrap -= _upgradePrice;
-			_gunCooldown -= 0.01f;
+			_gunCooldown -= 0.02f;
 		}
 	}
 
@@ -319,7 +319,7 @@ public class Player : Area2D
 		if (_upgradePrice <= _metalScrap)
 		{
 			_metalScrap -= _upgradePrice;
-			_missileCooldown -= 0.02f;
+			_missileCooldown -= 0.2f;
 		}
 	}
 }

@@ -7,7 +7,7 @@ public class Game : Node2D
 	private readonly PackedScene _playerScene = ResourceLoader.Load("res://player/Player.tscn") as PackedScene;
 	private readonly PackedScene _gameOverScene = ResourceLoader.Load("res://game/GameOver.tscn") as PackedScene;
 	private readonly PackedScene _levelScene = ResourceLoader.Load("res://game/Level.tscn") as PackedScene;
-	private readonly PackedScene _hudScene = ResourceLoader.Load("res://hud/Hud.tscn") as PackedScene;
+	private readonly PackedScene _hudScene = ResourceLoader.Load("res://hud/HUD.tscn") as PackedScene;
 	private readonly PackedScene _gameLevelScene = ResourceLoader.Load("res://game/GameLevel.tscn") as PackedScene;
 	private readonly PackedScene _fleetScene = ResourceLoader.Load("res://fleet/Fleet.tscn") as PackedScene;
 	private readonly PackedScene _fleetScene2 = ResourceLoader.Load("res://fleet/Fleet2.tscn") as PackedScene;

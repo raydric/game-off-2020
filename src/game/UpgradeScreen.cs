@@ -1,4 +1,3 @@
-using System.Globalization;
 using Godot;
 
 public class UpgradeScreen : Node2D
@@ -61,19 +60,20 @@ public class UpgradeScreen : Node2D
 		_healthValue.Text = _player.Health.ToString();
 		_maxHealthValue.Text = _player.MaxHealth.ToString();
 		_gunDamageValue.Text = _player.GunDamage.ToString();
-		_gunCooldownValue.Text = _player.GunCooldown.ToString(CultureInfo.InvariantCulture);
+		_gunCooldownValue.Text = _player.GunCooldown.ToString("n2");
 		_missileDamageValue.Text = _player.MissileDamage.ToString();
-		_missileCooldownValue.Text = _player.MissileCooldown.ToString(CultureInfo.InvariantCulture);
+		_missileCooldownValue.Text = _player.MissileCooldown.ToString("n2");
 		_speedValue.Text = _player.Speed.ToString();
 
 		if (_player.MetalScrap >= _player.UpgradePrice)
 		{
 			_healthButton.Disabled = false;
 			_gunDamageButton.Disabled = false;
-			_gunCooldownButton.Disabled = false;
 			_missileDamageButton.Disabled = false;
-			_missileCooldownButton.Disabled = false;
-			_speedButton.Disabled = false;
+
+			_speedButton.Disabled = _player.Speed >= 400;
+			_gunCooldownButton.Disabled = _player.GunCooldown <= 0.1;
+			_missileCooldownButton.Disabled = _player.MissileCooldown <= 1.1;
 		}
 		else
 		{
