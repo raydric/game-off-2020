@@ -42,12 +42,12 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="Title" type="Label" parent="."]
-margin_left = 283.053
-margin_top = 38.3189
-margin_right = 958.053
-margin_bottom = 185.319
+margin_left = 343.939
+margin_top = 33.2777
+margin_right = 990.939
+margin_bottom = 180.278
 custom_fonts/font = SubResource( 1 )
-text = "Game off 2020"
+text = "Other Galaxies"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -61,12 +61,12 @@ preprocess = 50.0
 process_material = SubResource( 2 )
 
 [node name="Author" type="Label" parent="."]
-margin_left = 861.172
-margin_top = 164.991
-margin_right = 1020.17
-margin_bottom = 214.991
+margin_left = 866.617
+margin_top = 170.436
+margin_right = 1092.62
+margin_bottom = 220.436
 custom_fonts/font = SubResource( 3 )
-text = "by Raydric"
+text = "Game off 2020"
 __meta__ = {
 "_edit_use_anchors_": false
 }

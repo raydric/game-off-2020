@@ -15,9 +15,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Game Off 2020"
+config/name="Other Galaxies"
 run/main_scene="res://menu/Menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/fleet1.png"
 
 [display]
 

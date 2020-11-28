@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game Off 2020", "Game Off 2020.csproj", "{215504A4-B7A0-442B-AC4B-5A28BB60D3FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Other Galaxies", "Other Galaxies.csproj", "{215504A4-B7A0-442B-AC4B-5A28BB60D3FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

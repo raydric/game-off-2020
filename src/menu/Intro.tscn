@@ -22,11 +22,21 @@ centered = false
 margin_left = 56.0
 margin_top = 51.0
 margin_right = 1223.0
-margin_bottom = 626.0
+margin_bottom = 643.0
 custom_fonts/font = SubResource( 1 )
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc aliquam sem turpis, id cursus turpis facilisis et. Integer tincidunt accumsan diam eget facilisis. Proin at consectetur massa, tempor consectetur felis. Vivamus est eros, rutrum sed felis vitae, tincidunt tincidunt dui. Pellentesque at justo eget magna tristique sollicitudin. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti.
+text = "This is my first game I've ever created so the result is not good. Also it requires more time for balancing because in this state the game is hard and boring at the same time :)
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent eget felis a sapien cursus facilisis ut eget erat. Ut vehicula ante sit amet dui dignissim, non pellentesque justo luctus. Mauris euismod libero facilisis, tempus enim in, gravida nibh. Nunc porta et enim a placerat. Nam luctus lacus vitae tellus sodales gravida. Ut suscipit tincidunt porta. Aenean eget felis enim. Pellentesque et volutpat lectus. Nulla et sagittis sem. Aenean a pretium leo. Quisque ex ipsum, blandit ac justo vitae, suscipit ullamcorper velit. Duis eget nisl convallis, lacinia mi in, sagittis dolor. Ut fermentum commodo ex, vel maximus enim pharetra sed. Vestibulum fringilla dolor nibh, sit amet ultricies diam imperdiet non."
+
+In 3072 our solar system is fully colonized and there is no space for more people. So people came up with ambitious plan to explore and colonize OTHER GALAXIES...
+
+
+GOAL: Try to protect the fleet as long as possible. 
+
+
+Controls: 
+W, S, A, D - movement
+SPACE - gun
+E - missile"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
