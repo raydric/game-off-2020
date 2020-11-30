@@ -24,13 +24,15 @@ margin_top = 51.0
 margin_right = 1223.0
 margin_bottom = 643.0
 custom_fonts/font = SubResource( 1 )
-text = "This is my first game I've ever created so the result is not good. Also it requires more time for balancing because in this state the game is hard and boring at the same time :)
-
-
-In 3072 our solar system is fully colonized and there is no space for more people. So people came up with ambitious plan to explore and colonize OTHER GALAXIES...
+text = "In 3072 our solar system is fully colonized and there is no space for more people. So people came up with ambitious plan to explore and colonize OTHER GALAXIES...
 
 
 GOAL: Try to protect the fleet as long as possible. 
+
+
+
+
+
 
 
 Controls: 
